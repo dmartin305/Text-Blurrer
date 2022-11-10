@@ -3,14 +3,14 @@ from img_filter import *
 import os
 import sys
 
-pass_0 = "images/pass_0"
-pass_1 = "images/pass_1"
-pass_2 = "images/pass_2"
-pass_3 = "images/pass_3"
+one = "images/1"
+two = "images/2"
+three = "images/3"
+four = "images/4"
 
 def main():
     # Iterate across images
-    for img_path in os.listdir(pass_0):
+    for img_path in os.listdir(one):
         
         # Load the image and check if the file is valid.
         # If valid resume,
@@ -28,19 +28,22 @@ def main():
         
         # file names are to be writen to memory as such:
         # 
-        # { <filters applied> . <index in captions> . png }
+        # {video section} / { <index in captions> . <number of filter passes> . png }
         # 
         # -images
-        # ---pass_0
+        # ---1
         # -----0.0.png
         # -----0.1.png
-        # ....
-        # ---pass_1
-        # -----1.0.png
+        # -----0.2.png
+        # -----0.3.png
         # ...
         # ...
-        # ---pass_3
-        # -----3.0.png
+        # ...
+        # ---4
+        # -----0.0.png
+        # -----0.1.png
+        # -----0.2.png
+        # -----0.3.png
 
         first_pass = apply_guassian_filter(img)
         second_pass = apply_guassian_filter(first_pass)
