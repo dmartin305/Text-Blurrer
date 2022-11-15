@@ -8,14 +8,15 @@ two = "images/2"
 three = "images/3"
 four = "images/4"
 
-def main():
+#def main():
+if (True):
     # Iterate across images
     for img_path in os.listdir(one):
-        
+        print(os.listdir(one))
         # Load the image and check if the file is valid.
         # If valid resume,
         # If not valid exit script
-        img = cv.imread(cv.samples.fineFile(img_path))
+        img = cv.imread(cv.samples.findFile(img_path))
         if img is None:
             sys.exit("Image " + img_path + " could not be read.")
 
@@ -45,17 +46,19 @@ def main():
         # -----0.2.png
         # -----0.3.png
 
-        first_pass = apply_guassian_filter(img, 21)
-        second_pass = apply_guassian_filter(first_pass, 42)
-        third_pass = apply_guassian_filter(second_pass, 63)
+        first_pass = apply_guassian_filter(img, 10)
+        print("first pass")
+        second_pass = apply_guassian_filter(first_pass, 20)
+        third_pass = apply_guassian_filter(second_pass, 30)
         
         first_pass_file_name = "1." + index + ".png"
         second_pass_file_name = "2." + index + ".png"
         third_pass_file_name = "3." + index + ".png"
+        print(done)
         
         cv.imwrite(first_pass_file_name, first_pass)
         cv.imwrite(second_pass_file_name, second_pass)
         cv.imwrite(third_pass_file_name, third_pass)
         
-    return
+    #return
     

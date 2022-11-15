@@ -1,4 +1,4 @@
-import cv2 as cv
+import cv2
 import numpy as np
 
 def apply_guassian_filter(img, blur_level):
@@ -6,7 +6,11 @@ def apply_guassian_filter(img, blur_level):
     # https://docs.opencv.org/4.x/d3/d63/classcv_1_1Mat.html
     # 
     # Apply the filter here and return the image post-filter
-    
+
+    ##img = cv2.imread("0.0.png")
+
+    ##cv2.imshow('original', img)
+    ##cv2.waitKey(0)
 
     grey_img = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
     blur_grey_img = cv2.medianBlur(grey_img, 5)
@@ -16,10 +20,10 @@ def apply_guassian_filter(img, blur_level):
 
     #red contours
     for contour in contours:
-        cv2.drawContours(img, [contour], 0, (0, 0, 255), 3)
+        cv2.drawContours(img, [contour], 0, (255, 255, 255), 3)
 
-    #cv2.imshow('Canny', output)
-    #cv2.waitKey(0)
+    ##cv2.imshow('Canny', img)
+    ##cv2.waitKey(0)
 
     mask = np.zeros(img.shape, np.uint8)
 
@@ -27,14 +31,13 @@ def apply_guassian_filter(img, blur_level):
 
     (rv, thresh) = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
 
+    ##blur_level = 3
+
     img_blur = cv2.GaussianBlur(img, (blur_level,blur_level), 0)
 
     cv2.drawContours(mask, contours, -1, (255,255,255),5)
     output = np.where(mask==np.array([255, 255, 255]), img_blur, img)
 
-    #cv2.imshow('Final', output)
-    #cv2.waitKey(0)
-    #cv2.imshow('Original', img)
-    #cv2.waitKey(0)
-
+    ##cv2.imshow('Final', output)
+    ##cv2.waitKey(0)
     return output
