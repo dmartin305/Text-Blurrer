@@ -45,9 +45,9 @@ def main():
         # -----0.2.png
         # -----0.3.png
 
-        first_pass = apply_guassian_filter(img)
-        second_pass = apply_guassian_filter(first_pass)
-        third_pass = apply_guassian_filter(second_pass)
+        first_pass = apply_guassian_filter(img, 21)
+        second_pass = apply_guassian_filter(first_pass, 42)
+        third_pass = apply_guassian_filter(second_pass, 63)
         
         first_pass_file_name = "1." + index + ".png"
         second_pass_file_name = "2." + index + ".png"
