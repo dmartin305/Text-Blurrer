@@ -1,4 +1,11 @@
 import os
+from zipfile import ZipFile
+
+def is_unfiltered(str):
+    split_file_name = str.split(".")
+    num_of_filters = split_file_name[1]
+    return num_of_filters == "0" 
+
 
 def clear_old_filters():
     # file names are to be writen to memory as such:
@@ -28,21 +35,31 @@ def clear_old_filters():
     # 
     # {*}/{*}.{0}.png
     
-    pass_0 = "images/1"
-    pass_1 = "images/2"
-    pass_2 = "images/3"
-    pass_3 = "images/4"
+    section_1 = "images/1/1.zip"
+    section_2 = "images/2/2.zip"
+    section_3 = "images/3/3.zip"
+    section_4 = "images/4/4.zip"
     
-    folders = { pass_0 , pass_1 , pass_2 , pass_3 }
+    folders = [ section_1 , section_2 , section_3 , section_4 ]
     
-    for folder in folders:
-        for img in os.listdir(folder):
-            
-            # TODO 
-            # Check the number of filter passes 
-            # If 0 passes do nothing
-            # Otherwise 
-            # delete the image    
-            
-            return 
-    return
+    
+    for video_section in range(4):
+        
+        # vs                <- video section accounting for 0 index
+        # new_folder_name   <- preparing folder 
+        vs = video_section + 1
+        new_folder_name = "images/" + str(vs) + "/" + str(vs) + "_clean.zip"
+        
+        # zin               <- our zip file that we need to read and clean
+        # zout              <- our new zip file we will write the files without filters
+        zin  = ZipFile(folders[video_section], "r")
+        zout = ZipFile(new_folder_name, "w")
+        for image in zin.infolist():
+            if (is_unfiltered(image.filename)):
+                buffer = zin.read(image.filename)
+                zout.writestr(image, buffer)
+        zin.close()
+        zout.close()
+
+    
+clear_old_filters()
