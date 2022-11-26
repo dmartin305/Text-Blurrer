@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 
-def apply_guassian_filter(img, blur_level):
+def apply_guassian_filter(img, blur_level, offset):
     # Image is passed in as an cv::Mat object
     # https://docs.opencv.org/4.x/d3/d63/classcv_1_1Mat.html
     # 
@@ -20,7 +20,7 @@ def apply_guassian_filter(img, blur_level):
 
     #red contours
     for contour in contours:
-        cv2.drawContours(img, [contour], 0, (255, 255, 255), 3)
+        cv2.drawContours(img, [contour], 0, (255, 255, 255))
 
     ##cv2.imshow('Canny', img)
     ##cv2.waitKey(0)
@@ -33,9 +33,9 @@ def apply_guassian_filter(img, blur_level):
 
     ##blur_level = 3
 
-    img_blur = cv2.GaussianBlur(img, (blur_level,blur_level), 0)
+    img_blur = cv2.GaussianBlur(img, (blur_level,blur_level), offset)
 
-    cv2.drawContours(mask, contours, -1, (255,255,255),5)
+    cv2.drawContours(mask, contours, -1, (255,255,255),0)
     output = np.where(mask==np.array([255, 255, 255]), img_blur, img)
 
     ##cv2.imshow('Final', output)

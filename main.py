@@ -12,11 +12,11 @@ four = "images/4"
 if (True):
     # Iterate across images
     for img_path in os.listdir(one):
-        print(os.listdir(one))
+        #print(os.listdir(one))
         # Load the image and check if the file is valid.
         # If valid resume,
         # If not valid exit script
-        img = cv.imread(cv.samples.findFile(img_path))
+        img = cv.imread(cv.samples.findFile(str(one) + "/" + str(img_path)))
         if img is None:
             sys.exit("Image " + img_path + " could not be read.")
 
@@ -25,7 +25,8 @@ if (True):
         
         path_name = os.path.split(img_path)
         file_name = path_name[1]
-        index = file_name.split(".")[1]
+        index = file_name.split(".")[0]
+        #print(index)
         
         # file names are to be writen to memory as such:
         # 
@@ -46,19 +47,18 @@ if (True):
         # -----0.2.png
         # -----0.3.png
 
-        first_pass = apply_guassian_filter(img, 10)
-        print("first pass")
-        second_pass = apply_guassian_filter(first_pass, 20)
-        third_pass = apply_guassian_filter(second_pass, 30)
+        #blur level must be odd
+        first_pass = apply_guassian_filter(img, 3, 0)
+        second_pass = apply_guassian_filter(first_pass, 5, 3)
+        third_pass = apply_guassian_filter(second_pass, 9, 5)
         
-        first_pass_file_name = "1." + index + ".png"
-        second_pass_file_name = "2." + index + ".png"
-        third_pass_file_name = "3." + index + ".png"
-        print(done)
+        first_pass_file_name = "images/1/" + index + ".1" + ".png"
+        #second_pass_file_name = "images/2/" + index + ".2" + ".png"
+        #third_pass_file_name = "images/3/" + index + ".3" + ".png"
         
         cv.imwrite(first_pass_file_name, first_pass)
-        cv.imwrite(second_pass_file_name, second_pass)
-        cv.imwrite(third_pass_file_name, third_pass)
+        #cv.imwrite(second_pass_file_name, second_pass)
+        #cv.imwrite(third_pass_file_name, third_pass)
         
     #return
     
