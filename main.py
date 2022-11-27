@@ -48,16 +48,16 @@ if (True):
         # -----0.3.png
 
         #blur level must be odd
-        first_pass = apply_guassian_filter(img, 3, 0)
-        second_pass = apply_guassian_filter(first_pass, 5, 3)
-        third_pass = apply_guassian_filter(second_pass, 9, 5)
+        first_pass = apply_guassian_filter_2(img)
+        second_pass = apply_guassian_filter_2(first_pass)
+        third_pass = apply_guassian_filter_2(second_pass)
         
         first_pass_file_name = "images/1/" + index + ".1" + ".png"
-        #second_pass_file_name = "images/2/" + index + ".2" + ".png"
+        second_pass_file_name = "images/2/" + index + ".2" + ".png"
         #third_pass_file_name = "images/3/" + index + ".3" + ".png"
         
         cv.imwrite(first_pass_file_name, first_pass)
-        #cv.imwrite(second_pass_file_name, second_pass)
+        cv.imwrite(second_pass_file_name, second_pass)
         #cv.imwrite(third_pass_file_name, third_pass)
         
     #return

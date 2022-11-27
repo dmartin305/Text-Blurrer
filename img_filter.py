@@ -1,6 +1,37 @@
 import cv2
 import numpy as np
+import skimage.color 
+import skimage.filters
+import matplotlib.pyplot as plt
 
+
+
+def apply_guassian_filter_2(image):
+#if (True):
+
+    #image = cv2.imread("0.0.png")
+    #cv2.imshow('Original', image)
+    #cv2.waitKey(0)
+
+    gray_image = skimage.color.rgb2gray(image)
+    blurred_image = skimage.filters.gaussian(gray_image, sigma=1.0)
+
+    t = 0.5
+    binary_mask = blurred_image < t
+
+    selection = image.copy()
+    selection[~binary_mask] = 255
+
+
+    #cv2.imshow('Final', selection)
+    #cv2.waitKey(0)
+
+    return selection
+
+
+
+
+#OLD CODE
 def apply_guassian_filter(img, blur_level, offset):
     # Image is passed in as an cv::Mat object
     # https://docs.opencv.org/4.x/d3/d63/classcv_1_1Mat.html
