@@ -54,11 +54,11 @@ if (True):
         
         first_pass_file_name = "images/1/" + index + ".1" + ".png"
         second_pass_file_name = "images/2/" + index + ".2" + ".png"
-        #third_pass_file_name = "images/3/" + index + ".3" + ".png"
+        third_pass_file_name = "images/3/" + index + ".3" + ".png"
         
         cv.imwrite(first_pass_file_name, first_pass)
         cv.imwrite(second_pass_file_name, second_pass)
-        #cv.imwrite(third_pass_file_name, third_pass)
+        cv.imwrite(third_pass_file_name, third_pass)
         
     #return
     
